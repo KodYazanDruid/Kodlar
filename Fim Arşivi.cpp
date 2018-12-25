@@ -1,7 +1,6 @@
 /*
 film güncelleme
 film siralama
-film arama yapim yilina göre
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -218,6 +217,7 @@ void film_ara(){
 			}
 		}
 }
+
 
 
 
