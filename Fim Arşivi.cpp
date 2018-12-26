@@ -1,5 +1,5 @@
 /*
-film güncelleme
+ayný yýla ait güncellemeleri hallet
 film siralama
 */
 #include <stdio.h>
@@ -11,10 +11,14 @@ void film_cikar();
 void menu();
 void tamam();
 void film_ara();
+void film_guncelle();
+void film_sirala();
+
 struct film {
 
 	char ad[50], yonetmen[50], senarist[50], basrol[50], yil[5];
 };
+
 int main(){
 	int l;
 	menu();
@@ -32,7 +36,8 @@ int main(){
 		tamam();
 	}
 	else if (l == 4) {
-
+		film_guncelle();
+		tamam();
 	}
 	else if (l == 5) {
 		film_ara();
@@ -217,8 +222,143 @@ void film_ara(){
 			}
 		}
 }
-
-
+void film_guncelle(){
+	FILE *yedek, *dosya;
+	dosya = fopen("film.txt", "r");
+	yedek = fopen("yedek.txt", "w");
+	int gun;
+	printf("Guncellenicek veriyi seciniz.\n");
+	printf("1- Yil\n");
+	printf("2- Ad\n");
+	printf("3- Yonetmen\n");
+	printf("4- Senarist\n");
+	printf("5- Basrol\n");
+	scanf("%d", &gun);
+	char a[50], b[50], c[50], d[50], e[50];
+	switch (gun){
+		case 1:{
+			char ayil[50];
+			char dyil[50];
+			printf("Degisecek filmin yilini giriniz: ");
+			scanf("%s",ayil);
+			printf("Yeni yili giriniz: ");
+			scanf("%s",dyil);
+			while (!feof(dosya)) {
+				fscanf(dosya, "%s %s %s %s %s\n", a, b, c, d, e);
+				if (strcmp(ayil, a) != 0) {
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, c, d, e);
+				}
+				else{
+					fprintf(yedek, "%s %s %s %s %s\n", dyil, b, c, d, e);
+				}
+			}
+		fclose(dosya);
+		fclose(yedek);
+		remove("film.txt");
+		rename("yedek.txt","film.txt");
+			break;
+		}
+		case 2:{
+			char aad[50];
+			char dad[50];
+			printf("Degisecek filmin adini giriniz: ");
+			scanf("%s",aad);
+			printf("Yeni adi giriniz: ");
+			scanf("%s",dad);
+			while (!feof(dosya)) {
+				fscanf(dosya, "%s %s %s %s %s\n", a, b, c, d, e);
+				if (strcmp(aad, b) != 0) {
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, c, d, e);
+				}
+				else{
+					fprintf(yedek, "%s %s %s %s %s\n", a, dad, c, d, e);
+				}
+			}
+		fclose(dosya);
+		fclose(yedek);
+		remove("film.txt");
+		rename("yedek.txt","film.txt");
+			break;
+		}
+		case 3:{
+			char ayon[50];
+			char dyon[50];
+			printf("Degisecek yonetmenin adini giriniz: ");
+			scanf("%s",ayon);
+			printf("Yeni yonetmenin adini giriniz: ");
+			scanf("%s",dyon);
+			while (!feof(dosya)) {
+				fscanf(dosya, "%s %s %s %s %s\n", a, b, c, d, e);
+				if (strcmp(ayon, c) != 0) {
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, c, d, e);
+				}
+				else{
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, dyon, d, e);
+				}
+			}
+		fclose(dosya);
+		fclose(yedek);
+		remove("film.txt");
+		rename("yedek.txt","film.txt");
+			break;
+		}
+		case 4:{
+			char asen[50];
+			char dsen[50];
+			printf("Degisecek senaristinin adini giriniz: ");
+			scanf("%s",asen);
+			printf("Yeni senaristin adini giriniz: ");
+			scanf("%s",dsen);
+			while (!feof(dosya)) {
+				fscanf(dosya, "%s %s %s %s %s\n", a, b, c, d, e);
+				if (strcmp(asen, d) != 0) {
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, c, d, e);
+				}
+				else{
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, c, dsen, e);
+				}
+			}
+		fclose(dosya);
+		fclose(yedek);
+		remove("film.txt");
+		rename("yedek.txt","film.txt");
+			break;
+		}
+		case 5:{
+			char abas[50];
+			char dbas[50];
+			printf("Degisecek basrol oyuncusunun adini giriniz: ");
+			scanf("%s",abas);
+			printf("Yeni basrol oyuncusunun adini giriniz: ");
+			scanf("%s",dbas);
+			while (!feof(dosya)) {
+				fscanf(dosya, "%s %s %s %s %s\n", a, b, c, d, e);
+				if (strcmp(abas, e) != 0) {
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, c, d, e);
+				}
+				else{
+					fprintf(yedek, "%s %s %s %s %s\n", a, b, c, d, dbas);
+				}
+			}
+		fclose(dosya);
+		fclose(yedek);
+		remove("film.txt");
+		rename("yedek.txt","film.txt");
+			break;
+		}
+	}
+	
+}
+void film_sirala(){
+	FILE *dosya, *yedek;
+	film sira;
+	dosya = fopen("film.txt","r");
+	yedek = fopen("yedek.txt","w");
+	while (!feof(dosya)){
+		fscanf(dosya,"%s %s %s %s %s",sira.yil, sira.ad, sira.yonetmen, sira.senarist, sira.basrol);
+		if
+	}
+}
 
 
 
